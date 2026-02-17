@@ -1,0 +1,14 @@
+null এটি ব্যবহারকারী দ্বারা intentionally খালি মান বোঝানোর জন্য ব্যবহৃত।
+undefined এটি জাভাস্ক্রিপ্ট দ্বারা automatically assign করা হয় যখন কোনো ভেরিয়েবল ডিক্লেয়ার করা হয় কিন্তু মান দেওয়া হয়নি।
+
+map() এটি অ্যারের প্রতিটি উপাদান process করে নতুন অ্যারে return করে।
+forEach() এটি শুধু loop চালায়, কোনো নতুন অ্যারে return করে না।
+
+==  এটি type coercion করে। মান একই হলে true, type আলাদা হলেও।
+===  এটি value এবং type দুটোই check করে।
+
+asynchronous কোডকে synchronous-এর মতো readable করে তোলে।
+fetch() promise return করে, await দিয়ে আমরা অপেক্ষা করতে পারি।
+
+Scope  কোন variable কোথায় access করা যাবে
+Global Scope সব জায়গা থেকে accessable
