@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style/style.css">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
      <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -18,18 +19,18 @@
         </div>
         <div>
            <ul class=" hidden md:flex gap-5 text-gray-500 ">
-  <li><a href="#" onclick="showHome()">Home</a></li>
-  <li><a href="#" onclick="showProducts()">Products</a></li>
-  <li><a href="#">About</a></li>
-  <li><a href="#">Contact</a></li>
-</ul>
+         <li><a href="#" onclick="showHome();loadHomeAllProducts()">Home</a></li>
+          <li><a href="#" onclick="showProducts()">Products</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+       </ul>
         </div>
          <div class="space-x-5">
              <button><i class="fa-solid fa-cart-shopping"></i></button>
            
               <button id="menu-btn" class="lg:hidden md:flex"><i class="fa-solid fa-bars"></i> </button>
                 <ul id="mobile-menu" class=" hidden text-gray-500 absolute  right-0 mt-2 bg-white shadow-lg p-5 rounded-lg w-40  space-y-3 ">
-                    <li><a href="#" onclick="showHome()">Home</a></li>
+                    <li><a href="#" onclick="showHome();loadHomeAllProducts()">Home</a></li>
                     <li><a href="#" onclick="showProducts()">Products</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
@@ -63,6 +64,14 @@
        <div id="category-container" class="categoryProduct-container grid grid-cols-1   md:grid-cols-4 gap-5">
 
        </div>
+<!-- 
+
+ <div id="showDetails-container">
+  <dialog id="show-modal" class="modal modal-bottom sm:modal-middle">
+   
+  </dialog>
+</div> -->
+
       <section id="features" class="bg-slate-200 py-10">
             <div class="text-center p-3">
                   <h1 class="text-xl font-bold">Why Choose Us</h1>
@@ -116,10 +125,10 @@
 </div>
       </section>
 
-      <section class="Trending-Product">
-               
-      </section>
-
+   <section class="py-3" id="trending-container">
+         <div id="trending-products" class="trending-products grid grid-cols-1  md:grid-cols-3 gap-5 my-3  ">      
+        </div>
+        </section>
 
 <footer class="bg-slate-600 text-gray-200">
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6 md:px-10 lg:px-20 py-12">

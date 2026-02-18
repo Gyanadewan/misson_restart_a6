@@ -4,7 +4,7 @@ undefined এটি জাভাস্ক্রিপ্ট দ্বারা a
 map() এটি অ্যারের প্রতিটি উপাদান process করে নতুন অ্যারে return করে।
 forEach() এটি শুধু loop চালায়, কোনো নতুন অ্যারে return করে না।
 
-==  এটি type coercion করে। মান একই হলে true, type আলাদা হলেও।
+==  এটি type coercion করে। মান একই হলে true, type আলাদা হলেও Kaj kor
 ===  এটি value এবং type দুটোই check করে।
 
 asynchronous কোডকে synchronous-এর মতো readable করে তোলে।

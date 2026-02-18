@@ -3,7 +3,7 @@ const features = document.getElementById("features");
 const categoriesContainer = document.getElementById("categories-container");
 const allProductsContainer = document.getElementById("allProducts-container");
 const categoryContainer = document.getElementById("category-container");
-
+const trendingContainer = document.getElementById("trending-container")
 const showHome = () => {
     if (banner) banner.classList.remove("hidden");
      if (features) features.classList.remove("hidden");
@@ -11,28 +11,32 @@ const showHome = () => {
     if (categoriesContainer) categoriesContainer.classList.add("hidden");
     if (allProductsContainer) allProductsContainer.classList.add("hidden");
     if (categoryContainer) categoryContainer.classList.add("hidden");
+
+     if (trendingContainer) trendingContainer.classList.remove("hidden");
+
 }
 
-
 const showProducts = () => {
-
     if (banner) banner.classList.add("hidden");
     if (features) features.classList.add("hidden");
 
     if (categoriesContainer) categoriesContainer.classList.remove("hidden");
     if (allProductsContainer) allProductsContainer.classList.remove("hidden");
     if (categoryContainer) categoryContainer.classList.remove("hidden");
+     
+     if (trendingContainer) trendingContainer.classList.add("hidden");
 
     loadCategories();
 }
-
-
-
 const menuBtn = document.getElementById("menu-btn");
 const mobileMenu = document.getElementById("mobile-menu");
 menuBtn.addEventListener("click",()=>{
-    mobileMenu.classList.toggle("hidden")
+ mobileMenu.classList.toggle("hidden")
 })
+
+// const showDetails =(id)=>{
+ 
+// }
 
  const loadAllProducts=()=>{
     // console.log("click allbtn")
@@ -44,6 +48,15 @@ menuBtn.addEventListener("click",()=>{
    })
  }
 
+  const loadHomeAllProducts=()=>{
+    // console.log("click allbtn")
+   const url = ("https://fakestoreapi.com/products")
+    fetch (url)
+   .then(res=>res.json())
+   .then(data=> {
+     displayTrendingProducts (data)
+   })
+ }
 //   {
 //     "id": 1,
 //     "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -55,6 +68,56 @@ menuBtn.addEventListener("click",()=>{
 //       "rate": 3.9,
 //       "count": 120
 //     }
+
+
+ const displayTrendingProducts = (trendingGoodProducts)=>{
+      const trendingContainer = document.getElementById("trending-container")
+      const trendingProducts = document.getElementById("trending-products")
+     trendingProducts.innerHTML = ""
+       if (!document.getElementById("trending-title")) {
+        const h1 = document.createElement("h1");
+        h1.id = "trending-title";
+        h1.innerText = "Trending Now";
+        h1.classList.add("text-2xl", "font-bold", "mb-4", "text-center");
+        trendingContainer.insertBefore(h1, trendingProducts)
+    }
+   const trending = trendingGoodProducts.filter(Product =>Product.rating.rate >= 4.5)
+  const topthreeProduct = trending.slice(0,3)
+  // console.log(topthreeProduct)
+   topthreeProduct.forEach(product =>{
+    console.log(product)
+   const div = document.createElement("div")
+   div.innerHTML = `
+             <div class="card bg-base-100 shadow-sm m-2 p-2 flex flex-col h-96">
+  <figure class="h-60 flex items-center justify-center bg-slate-200">
+    <img src="${product.image}" alt="" class="h-30 "/>
+  </figure>
+  <div class="flex justify-between text-sm text-gray-600 mt-2 px-2">
+    <span class="bg-slate-200 rounded-md px-2 py-0">${product.category}</span>
+    <span><i class="fa-solid fa-star text-yellow-300"></i> ${product.rating?.rate || 0}
+      (${product.rating?.count || 0})
+    </span>
+  </div>
+  <div class="card-body p-2">
+    <h2 class="card-title text-lg font-medium line-clamp-2">${product.title}</h2>
+    <p class="font-bold text-blue-600 mt-1">$${product.price}</p>
+    <div class="card-actions justify-between mt-2">
+      <button onclick ="showDetails(${product.id})" class="btn btn-sm">
+      <span><i class="fa-regular fa-eye"></i></span>
+      Details</button>
+      <button class="btn btn-sm primary bg-blue-600 text-slate-200">
+    <span><i class="fa-solid fa-cart-shopping"></i></span>
+     Add 
+   </button>
+
+    </div>
+  </div>
+</div>
+   `
+   trendingProducts.append(div)
+   })
+
+ }
 
 const loadProductsByCategory = (name) => {
   const url = `https://fakestoreapi.com/products/category/${name}`;
@@ -70,8 +133,7 @@ const displayProductByCatagory = (categories)=>{
     categoryProducContainer.innerHTML = ""
     categories.forEach(category =>{
     const div = document.createElement("div")
-    div.innerHTML = `
-    
+    div.innerHTML = `   
     <div class="card bg-base-100 shadow-sm m-2 p-2">
   <figure class="h-60 flex items-center justify-center bg-slate-200">
     <img src="${category.image}" alt="" class="h-30 "/>
@@ -83,7 +145,7 @@ const displayProductByCatagory = (categories)=>{
     </span>
   </div>
   <div class="card-body p-2">
-    <h2 class="card-title text-lg font-medium ">${category.title}</h2>
+    <h2 class="card-title text-lg font-medium line-clamp-2">${category.title}</h2>
     <p class="font-bold text-blue-600 mt-1">$${category.price}</p>
     <div class="card-actions justify-between mt-2">
       <button class="btn btn-sm">
@@ -122,9 +184,9 @@ const displayAllProducts =(products)=>{
     </span>
   </div>
   <div class="card-body p-2">
-    <h2 class="card-title text-lg font-medium ">${product.title}</h2>
+    <h2 class="card-title text-lg font-medium line-clamp-2">${product.title}</h2>
     <p class="font-bold text-blue-600 mt-1">$${product.price}</p>
-    <div class="card-actions justify-between mt-2">
+    <div class="card-actions justify-between mt-auto">
       <button class="btn btn-sm">
       <span><i class="fa-regular fa-eye"></i></span>
       Details</button>
@@ -200,4 +262,4 @@ const loadCategories =()=>{
     buttonsContainer.appendChild(div);
 });
 };
-  loadCategories()
+  loadHomeAllProducts()
